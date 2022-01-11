@@ -14,13 +14,22 @@ namespace lb6
         string search_input = "body > main > div > div.center > div > section.block.block_100.search_form > form > div:nth-child(1) > div:nth-child(1) > div > input";
         string search_non_text = "body > main > div > div.center > div > section:nth-child(2) > div > div > div.card-header > h2";
 
+
         private IWebDriver driver;
+
+        //public static ChromeDriverService service;
+
         public IDictionary<string, object> vars { get; private set; }
         private IJavaScriptExecutor js;
         [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
+            var x = new ChromeOptions();
+            x.AddArgument("--headless");
+            x.AddArgument("--no-sandbox");
+
+            driver = new ChromeDriver(x);
+
             js = (IJavaScriptExecutor)driver;
             vars = new Dictionary<string, object>();
         }
